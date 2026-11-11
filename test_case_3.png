@@ -1,0 +1,34 @@
+
+from datetime import datetime
+
+tasks = []
+
+# (a) Invalid Priority
+title = "Pay bill"
+priority = "Urgent"
+
+if priority not in ["High", "Medium", "Low"]:
+    print("Invalid priority. Enter High, Medium or Low.")
+
+# (b) Invalid Date
+due_date = "15-10-2026"
+
+try:
+    datetime.strptime(due_date, "%Y-%m-%d")
+    print("Valid date.")
+except ValueError:
+    print("Invalid date. Use YYYY-MM-DD.")
+
+# (c) Complete Invalid Task ID
+task_id = "T999"
+
+found = False
+
+for task in tasks:
+    if task["id"] == task_id:
+        task["status"] = "Done"
+        found = True
+        break
+
+if not found:
+    print("Task T999 not found.")
