@@ -1,0 +1,29 @@
+
+tasks = []
+
+try:
+    with open("tasks.txt", "r") as file:
+        import ast
+        tasks = ast.literal_eval(file.read())
+
+except (FileNotFoundError, ValueError, SyntaxError):
+    tasks = []
+
+print("1. Add Task")
+print("2. View by Priority")
+print("3. Show Pending")
+print("4. Complete Task")
+
+choice = input("Enter choice: ")
+
+if choice == "3":
+    pending = [
+        task for task in tasks
+        if task["status"] == "Pending"
+    ]
+
+    if len(pending) == 0:
+        print("No pending tasks. You are all caught up!")
+    else:
+        for task in pending:
+            print(task)
