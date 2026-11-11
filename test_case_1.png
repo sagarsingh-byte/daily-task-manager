@@ -1,0 +1,34 @@
+
+from datetime import datetime
+
+tasks = []
+
+title = input("Enter task title: ")
+priority = input("Enter priority (High/Medium/Low): ")
+due_date = input("Enter due date (YYYY-MM-DD): ")
+
+if priority not in ["High", "Medium", "Low"]:
+    print("Invalid priority. Enter High, Medium or Low.")
+
+else:
+    try:
+        datetime.strptime(due_date, "%Y-%m-%d")
+
+        task = {
+            "id": "T101",
+            "title": title,
+            "priority": priority,
+            "due": due_date,
+            "status": "Pending"
+        }
+
+        tasks.append(task)
+
+        with open("tasks.txt", "w") as file:
+            file.write(str(tasks))
+
+        print("Task added.")
+        print("T101 |", title, "|", priority, "|", due_date, "| Pending")
+
+    except ValueError:
+        print("Invalid date. Use YYYY-MM-DD.")
