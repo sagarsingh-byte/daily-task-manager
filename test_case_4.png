@@ -1,0 +1,69 @@
+
+tasks = [
+    {
+        "id": "T101",
+        "title": "Submit report",
+        "priority": "High",
+        "due": "2026-10-15",
+        "status": "Pending"
+    },
+    {
+        "id": "T102",
+        "title": "Buy milk",
+        "priority": "Low",
+        "due": "2026-10-11",
+        "status": "Pending"
+    },
+    {
+        "id": "T103",
+        "title": "Call bank",
+        "priority": "Medium",
+        "due": "2026-10-12",
+        "status": "Pending"
+    }
+]
+
+# View by priority
+priority_order = {
+    "High": 1,
+    "Medium": 2,
+    "Low": 3
+}
+
+tasks.sort(
+    key=lambda x: priority_order[x["priority"]]
+)
+
+for task in tasks:
+    print(
+        task["id"], "|",
+        task["title"], "|",
+        task["priority"], "|",
+        task["due"]
+    )
+
+# Complete task T101
+task_id = "T101"
+found = False
+
+for task in tasks:
+    if task["id"] == task_id:
+        task["status"] = "Done"
+        found = True
+        break
+
+if found:
+    pending = sum(
+        1 for task in tasks
+        if task["status"] == "Pending"
+    )
+
+    print(
+        "Task T101 marked as done.",
+        "Pending tasks:", pending
+    )
+
+# Save tasks
+with open("tasks.txt", "w") as file:
+    file.write(str(tasks))
+
